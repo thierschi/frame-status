@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth';
-import NavButton from './components/nav-button';
+import { NavButton } from './components/nav-components';
 import { authOptions } from './utils/auth';
 
 export default async function Home() {

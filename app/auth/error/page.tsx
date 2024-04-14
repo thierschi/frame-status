@@ -1,5 +1,5 @@
 import AuthWrapper from '@/app/components/auth-wrapper';
-import NavButton from '@/app/components/nav-button';
+import { NavButton } from '@/app/components/nav-components';
 import _ from 'lodash';
 import { LogIn } from 'lucide-react';
 import { useMemo } from 'react';

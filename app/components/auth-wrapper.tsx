@@ -31,7 +31,7 @@ export default async function AuthWrapper({ error, children }: Props) {
             >
                 <div className="flex flex-col items-center p-6 pt-10">
                     <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-                        Frame Status
+                        ft
                     </h2>
                     <div className="h-12"></div>
                     {children}
