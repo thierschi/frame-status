@@ -22,30 +22,35 @@ import { Plus } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-
-const photoparadiesFormShema = z.object({
-    storeId: z.string().regex(/^\d+$/),
-    orderId: z.string().regex(/^\d+$/),
-});
+import { photoparadiesFormSchema } from '../model/formsSchemas';
+import PhotoparadiesAPI from '../service/photoparadies';
 
 export default function PhotoparadiesForm(): JSX.Element {
     const router = useRouter();
-    const form = useForm<z.infer<typeof photoparadiesFormShema>>({
-        resolver: zodResolver(photoparadiesFormShema),
+    const form = useForm<z.infer<typeof photoparadiesFormSchema>>({
+        resolver: zodResolver(photoparadiesFormSchema),
         defaultValues: {
             storeId: '',
             orderId: '',
         },
     });
 
-    // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof photoparadiesFormShema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values);
+    async function onSubmit(values: z.infer<typeof photoparadiesFormSchema>) {
+        const order = await PhotoparadiesAPI.fetchOrderStatus(
+            values.storeId,
+            values.orderId
+        );
+        console.log(order);
+        await fetch('/api/new/photoparadies', {
+            method: 'POST',
+            body: JSON.stringify({
+                data: values,
+                order: order,
+            }),
+        });
+        router.back();
     }
 
-    // 2. Define a submit handler.
     function onCancel() {
         form.reset();
         router.back();

@@ -1,6 +1,7 @@
 import ContentWrapper from '@/app/components/content-wrapper';
 import PhotoparadiesForm from '@/app/forms/photoparadies';
-import { PageProps } from '@/app/types/next';
+import { PageProps } from '@/app/model/next';
+
 import { notFound } from 'next/navigation';
 
 const trackerTypes = ['photoparadies'];
